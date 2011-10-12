@@ -1,6 +1,7 @@
 # In the 20x20 grid below, four numbers along a diagonal line have been marked in red.
 # The product of these numbers is 26  63  78  14 = 1788696.
-# What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20x20 grid?
+# What is the greatest product of four adjacent numbers in any direction 
+# (up, down, left, right, or diagonally) in the 20x20 grid?
 
 require 'matrix'
 
@@ -28,12 +29,8 @@ input =
 
 x = Matrix.rows(input.lines.map { |l| l.split.map { |n| n.to_i } })
 a = Array.new
-b = Array.new
-c = Array.new
-d = Array.new
 
 $i = 0
-
 while $i < 17
   $j = 0
   while $j < 17
@@ -44,34 +41,34 @@ while $i < 17
 end
 
 $x = 0
-$y = 0
-
-while $x < 18
+while $x < 17
+  $y = 0
   while $y < 20
-    puts x[$x,$y]*x[$x+1,$y]*x[$x+2,$y]*x[$x+3,$y]
-    $y +=1
+    a << x[$x,$y]*x[$x+1,$y]*x[$x+2,$y]*x[$x+3,$y]
+    $y += 1
   end
-  $x +=1
+  $x += 1
 end
    
 $m = 0
-$n = 0
- 
 while $m < 20
+  $n = 0
   while $n < 17
-    c << x[$m,$n]*x[$m,$n+1]*x[$m,$n+2]*x[$m,$n+3]
+    a << x[$m,$n]*x[$m,$n+1]*x[$m,$n+2]*x[$m,$n+3]
     $n +=1
   end
   $m +=1
 end
 
-$a = 16
-$b = 0
-
-while $a > 0
-  while $b < 17
-    d << x[$a,$b-3]*x[$a+1,$b-2]*x[$a+2,$b-1]*x[$a+3,$b]
-    $b +=1
+$a = 3
+while $a < 20
+  $b = 19
+  while $b > 2
+    a << x[$a,$b-3]*x[$a-1,$b-2]*x[$a-2,$b-1]*x[$a-3,$b]
+    $b -=1
   end
-  $a -=1
+  $a +=1
 end 
+
+puts a.count
+puts a.max
