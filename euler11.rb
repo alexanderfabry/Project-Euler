@@ -1,3 +1,7 @@
+# In the 20x20 grid below, four numbers along a diagonal line have been marked in red.
+# The product of these numbers is 26  63  78  14 = 1788696.
+# What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20x20 grid?
+
 require 'matrix'
 
 input = 
@@ -29,9 +33,9 @@ c = Array.new
 d = Array.new
 
 $i = 0
-$j = 0
 
 while $i < 17
+  $j = 0
   while $j < 17
     a << x[$i,$j]*x[$i+1,$j+1]*x[$i+2,$j+2]*x[$i+3,$j+3]
     $j +=1
@@ -42,9 +46,9 @@ end
 $x = 0
 $y = 0
 
-until $x == 16
-  until $y == 20
-    b << x[$x,$y]*x[$x+1,$y]*x[$x+2,$y]*x[$x+3,$y]
+while $x < 18
+  while $y < 20
+    puts x[$x,$y]*x[$x+1,$y]*x[$x+2,$y]*x[$x+3,$y]
     $y +=1
   end
   $x +=1
@@ -71,8 +75,3 @@ while $a > 0
   end
   $a -=1
 end 
-
-puts a.count
-puts b.count
-puts c.count
-puts d.count
